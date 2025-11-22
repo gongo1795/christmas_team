@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeViewModal = document.getElementById('close-view-modal');
 
     let draggedData = null;
-    let memoDropPosition = { left: 0, top: 0, type: null }; // 드롭 위치와 타입 저장
+    let memoDropPosition = { left: 0, top: 0, type: null }; 
 
-    const STORAGE_KEY = 'christmasTreeState_Memo'; // 로컬 저장소 키
+    const STORAGE_KEY = 'christmasTreeState_Memo'; 
 
     // --- 1. 로컬 저장소 기능 ---
     function saveTreeState(state) {
@@ -50,8 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 viewModal.style.display = 'block';
             });
             
+            // 기본 메모 노트에만 아이콘 표시 (필요에 따라)
             if (data.type === 'memo-note') {
-                 ornament.innerHTML = '📝'; // 기본 메모 노트에만 아이콘 표시
+                 ornament.innerHTML = '📝'; 
             }
         }
         
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault(); 
     });
 
-    // **핵심 수정 부분:** 모든 장식 드롭 시 메모 팝업을 띄우도록 조건문을 제거했습니다.
+    // 모든 장식 드롭 시 메모 팝업을 띄우는 핵심 로직
     treeArea.addEventListener('drop', (e) => {
         e.preventDefault();
         
@@ -161,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const memo = inputMemoText.value.trim();
         
         if (memo) {
-            // memoDropPosition에 저장된 타입과 메모 데이터를 사용
+            // 메모 데이터와 저장된 위치를 사용
             addOrnamentToTree(
                 memoDropPosition.type, 
                 memoDropPosition.left, 
@@ -175,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 6. 트리 장식 추가 및 저장 함수 ---
-    function addOrnamentToTree(type, left, top, memo) { // memo는 이제 필수가 됨
+    function addOrnamentToTree(type, left, top, memo) { 
         const newOrnamentData = {
             id: getNextId(),
             type: type,
