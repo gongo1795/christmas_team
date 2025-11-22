@@ -1,6 +1,55 @@
-/* 장식 종류별 스타일 (이모지 버전으로 대체) */
+/* --- 트리 꾸미기 페이지 전용 스타일 --- */
 
-/* 장식 아이템 기본 스타일 재정의 (이모지를 담기 위해) */
+.tree-main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* --- Bangers 폰트 크기 조정 (깨짐 방지) --- */
+
+/* 페이지 메인 제목 (h1) */
+.tree-main h1 {
+    font-family: var(--font-bangers);
+    font-size: 2.8em; /* Bangers 폰트의 크기를 줄여 오버플로우를 방지합니다. */
+    margin-bottom: 5px;
+}
+
+/* 장식 목록 제목 (h2) */
+.ornament-palette h2 {
+    font-family: var(--font-bangers);
+    font-size: 1.6em; /* 크기 조정 */
+    color: var(--color-black-text);
+    border-bottom: 2px dashed var(--color-green-christmas);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.decorator-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* 1. 장식 팔레트 */
+.ornament-palette {
+    flex: 0 0 200px; /* 고정 너비 */
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    height: 600px; /* 트리 영역 높이와 맞춤 */
+}
+
+.ornaments-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* --- 장식 아이템 기본 스타일 (이모지용 재정의) --- */
 .ornament {
     width: 50px; /* 크기 통일 */
     height: 50px; /* 크기 통일 */
@@ -21,38 +70,130 @@
     cursor: grabbing;
 }
 
-/* 1. 골드 스타 (⭐️) */
-.ball-red::before {
-    content: "⭐️"; 
+/* 장식 종류별 이모지 스타일 */
+.ball-red::before { content: "⭐️"; } 
+.ball-green::before { content: "❤️"; }
+.star-gold::before { content: "🤎"; }
+.candy-cane::before { content: "🩶"; }
+.gift-box::before { content: "🟠"; }
+.snowflake::before { content: "🟡"; }
+.memo-note::before { content: "📌"; }
+
+/* 2. 트리 영역 */
+.tree-area {
+    flex: 1;
+    position: relative;
+    height: 600px;
+    background-color: #eee; /* 드롭 영역 표시 */
+    border: 3px dashed var(--color-green-christmas);
+    border-radius: 10px;
+    overflow: hidden; /* 장식의 이동 범위 제한 */
+    background: linear-gradient(to bottom, #F8F8F8 0%, #DCDCDC 100%);
 }
 
-/* 2. 하트 (❤️) */
-.ball-green::before {
-    content: "❤️";
+.main-tree {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 90%;
+    background-color: var(--color-green-christmas);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* 삼각형 (간단한 트리 모양) */
+    border-radius: 10% / 50%;
 }
 
-/* 3. 브라운 하트 (🤎) */
-.star-gold::before {
-    content: "🤎"; 
+/* 드롭된 장식 아이템 (트리 위에서) */
+.tree-area .ornament {
+    position: absolute;
 }
 
-/* 4. 실버 (🩶) */
-.candy-cane::before {
-    content: "🩶";
-    /* candy-cane의 기존 크기/변형 설정은 무시합니다. */
+/* --- 공통 모달(팝업) 스타일 --- */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); 
 }
 
-/* 5. 오렌지 원 (🟠) */
-.gift-box::before {
-    content: "🟠";
+.modal-content {
+    background-color: var(--color-white-snow);
+    color: var(--color-black-text);
+    margin: 15% auto; 
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    font-family: var(--font-primary);
 }
 
-/* 6. 옐로우 원 (🟡) */
-.snowflake::before { 
-    content: "🟡";
+.modal-content h2 {
+    color: var(--color-button-dark-red);
+    border-bottom: 1px solid var(--color-gold-accent);
+    padding-bottom: 10px;
+    margin-top: 0;
 }
 
-/* 메모 장식 (기존 메모지 모양 아이템이 없으므로 이모지로 대체) */
-.memo-note::before {
-    content: "📌"; /* 핀 모양 이모지로 변경 */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--color-red-christmas);
+}
+
+/* --- 메모 입력 폼 내부 스타일 --- */
+#memo-input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#input-memo-text {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 2px solid var(--color-green-christmas);
+    border-radius: 5px;
+    resize: none; 
+    font-family: var(--font-primary);
+    font-size: 1em;
+    background-color: white;
+    color: var(--color-black-text);
+}
+
+/* --- 메모 열람 텍스트 스타일 --- */
+#view-memo-text {
+    white-space: pre-wrap; 
+    font-size: 1.1em;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    border: 1px dashed #ccc;
+}
+
+/* --- 모든 메모 장식에 공통 적용 --- */
+.ornament.memo-ornament, 
+.ornament[data-memo] {
+    cursor: pointer !important;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 2px rgba(0,0,0,0.5); /* 그림자를 이모지 주변에 작게 설정 */
+    border-radius: 50%; /* 이모지 주변을 원형으로 강조 */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ornament.memo-ornament:hover,
+.ornament[data-memo]:hover {
+    transform: scale(1.15); /* 호버 시 약간 크게 */
 }
