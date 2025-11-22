@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     padding: 40px 20px;
-    background-color: var(--color-white-snow);
+    background-color: var(--color-dark-brown-background); /* 다른 페이지와 동일한 변수 사용 */
 }
 
 .letter-container {
