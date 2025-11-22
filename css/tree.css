@@ -12,14 +12,14 @@
 /* 페이지 메인 제목 (h1) */
 .tree-main h1 {
     font-family: var(--font-bangers);
-    font-size: 2.8em; /* Bangers 폰트 크기 안정화 */
+    font-size: 2.8em; 
     margin-bottom: 5px;
 }
 
 /* 장식 목록 제목 (h2) */
 .ornament-palette h2 {
     font-family: var(--font-bangers);
-    font-size: 1.6em; /* Bangers 폰트 크기 안정화 */
+    font-size: 1.6em; 
     color: var(--color-black-text);
     border-bottom: 2px dashed var(--color-green-christmas);
     padding-bottom: 10px;
@@ -77,7 +77,6 @@
 .candy-cane::before { content: "🩶"; display: inline-block; }
 .gift-box::before { content: "🟠"; display: inline-block; }
 .snowflake::before { content: "🟡"; display: inline-block; }
-/* memo-note는 팔레트에서 제거되었으므로 스타일은 비워둠 */
 
 /* 2. 트리 영역 */
 .tree-area {
