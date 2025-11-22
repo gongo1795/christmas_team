@@ -70,3 +70,25 @@
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
+
+/* css/main.css 파일의 마지막 부분에 아래 내용을 추가합니다. */
+
+.hero-text h1 {
+    font-size: 3em;
+    color: var(--color-gold-accent); 
+    margin-bottom: 10px;
+    text-shadow: 2px 2px var(--color-red-christmas);
+    
+    /* Bangers 폰트 적용 */
+    font-family: var(--font-bangers); 
+}
+
+.card h2 {
+    color: var(--color-green-christmas);
+    border-bottom: 2px dashed var(--color-red-christmas);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    
+    /* Bangers 폰트 적용 */
+    font-family: var(--font-bangers); 
+}

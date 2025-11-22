@@ -6,9 +6,28 @@
     --color-green-christmas: #27AE60;
     --color-gold-accent: #FFD700;
 
-    /* 폰트 설정 (기본 폰트) */
-    --font-primary: 'Malgun Gothic', 'Arial', sans-serif;
-    --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Bangers (영문), Poor Story (한글) 폰트 설정 */
+    /* Bangers는 영문 전용이므로, Poor Story를 백업으로 지정합니다. */
+    --font-bangers: 'Bangers', cursive;
+    --font-poorstory: 'Poor Story', cursive;
+
+    /* 기본 폰트: 한글 가독성을 우선하되, 영문은 Bangers를 기본으로 사용합니다. */
+    --font-primary: var(--font-poorstory); 
+}
+
+/* ... (기존 body, 버튼 스타일 등은 그대로 둡니다) ... */
+
+
+/* --- 네비게이션 바 스타일 (네비게이션 로고에 Bangers 적용) --- */
+.nav-logo a {
+    color: var(--color-red-christmas);
+    font-size: 1.8em;
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: 2px;
+    
+    /* 로고는 강하게 영문 폰트 적용 */
+    font-family: var(--font-bangers); 
 }
 
 * {

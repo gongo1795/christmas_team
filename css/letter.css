@@ -83,3 +83,14 @@ textarea {
 .feedback-error {
     color: var(--color-red-christmas);
 }
+
+/* css/letter.css 파일의 가장 아래에 아래 내용을 추가합니다. */
+
+.letter-container h1 {
+    text-align: center;
+    color: var(--color-black-text);
+    margin-bottom: 10px;
+    
+    /* Bangers 폰트 적용 */
+    font-family: var(--font-bangers); 
+}
