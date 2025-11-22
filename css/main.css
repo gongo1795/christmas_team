@@ -52,6 +52,7 @@
 .card {
     flex: 1;
     background-color: #FFFFFF;
+    color: var(--color-black-text); /* 👈 이 라인을 추가합니다. */
     padding: 30px;
     border-radius: 10px;
     box-shadow: var(--shadow-light);
@@ -59,6 +60,7 @@
     min-width: 300px;
     transition: transform 0.3s;
 }
+
 
 .card:hover {
     transform: translateY(-5px);
