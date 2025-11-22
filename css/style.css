@@ -1,0 +1,99 @@
+:root {
+    /* 색상 팔레트 */
+    --color-white-snow: #F0F0F0;
+    --color-black-text: #1A1A1A;
+    --color-red-christmas: #C0392B;
+    --color-green-christmas: #27AE60;
+    --color-gold-accent: #FFD700;
+
+    /* 폰트 설정 (기본 폰트) */
+    --font-primary: 'Malgun Gothic', 'Arial', sans-serif;
+    --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-white-snow);
+    color: var(--color-black-text);
+    font-family: var(--font-primary);
+    margin: 0;
+    padding-top: 70px; /* 네비게이션 높이만큼 패딩 */
+    line-height: 1.6;
+}
+
+/* --- 공통 버튼 스타일 --- */
+.button-red, .button-green {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.button-red {
+    background-color: var(--color-red-christmas);
+    color: var(--color-white-snow);
+}
+.button-red:hover {
+    background-color: #A93224;
+    transform: translateY(-2px);
+}
+
+.button-green {
+    background-color: var(--color-green-christmas);
+    color: var(--color-white-snow);
+}
+.button-green:hover {
+    background-color: #219d55;
+    transform: translateY(-2px);
+}
+
+/* --- 네비게이션 바 스타일 --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--color-black-text);
+    box-shadow: var(--shadow-light);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 20px;
+}
+
+.nav-logo a {
+    color: var(--color-red-christmas);
+    font-size: 1.8em;
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.nav-links a {
+    color: var(--color-white-snow);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 1em;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--color-green-christmas);
+}

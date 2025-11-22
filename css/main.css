@@ -1,0 +1,72 @@
+/* --- 메인 페이지 전용 스타일 --- */
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 1. 히어로 섹션 */
+.hero-section {
+    position: relative;
+    background-color: var(--color-black-text); /* 배경색 검정 */
+    color: var(--color-white-snow);
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    /* 
+
+[Image of snowy night christmas scene with subtle animation]
+ */
+    /* 실제로는 배경 이미지 또는 애니메이션을 여기에 삽입 */
+}
+
+.hero-text h1 {
+    font-size: 3em;
+    color: var(--color-gold-accent); /* 골드 강조 */
+    margin-bottom: 10px;
+    text-shadow: 2px 2px var(--color-red-christmas);
+}
+
+.hero-text p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.hero-actions a {
+    margin: 0 10px;
+}
+
+/* 2. 기능 카드 섹션 */
+.feature-cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.card {
+    flex: 1;
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    text-align: center;
+    min-width: 300px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    color: var(--color-green-christmas);
+    border-bottom: 2px dashed var(--color-red-christmas);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}

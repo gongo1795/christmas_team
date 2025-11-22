@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌲 나만의 트리 꾸미기</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tree.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="index.html">X-MAS LAB</a></div>
+            <nav class="nav-links">
+                <a href="index.html">메인</a>
+                <a href="letter.html">편지 보내기</a>
+                <a href="tree-decorator.html">트리 꾸미기</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tree-main">
+        <h1>🌲 나만의 크리스마스 트리 꾸미기</h1>
+        <p class="subtitle">장식 아이템을 드래그하여 트리 위에 드롭하세요. (새로고침해도 유지됩니다!)</p>
+        
+        <div class="decorator-container">
+            
+            <div class="ornament-palette">
+                <h2>🎁 장식 목록</h2>
+                <div class="ornaments-list">
+                    <div class="ornament ball-red" draggable="true" data-type="ball-red"></div>
+                    <div class="ornament ball-green" draggable="true" data-type="ball-green"></div>
+                    <div class="ornament star-gold" draggable="true" data-type="star-gold"></div>
+                    <div class="ornament candy-cane" draggable="true" data-type="candy-cane"></div>
+                    <div class="ornament gift-box" draggable="true" data-type="gift-box"></div>
+                    <div class="ornament snowflake" draggable="true" data-type="snowflake"></div>
+                </div>
+                <button id="reset-button" class="button-red">트리 초기화 🗑️</button>
+            </div>
+            
+            <div id="tree-area" class="tree-area">
+                <div class="main-tree"></div> 
+            </div>
+        </div>
+    </main>
+
+    <script src="js/tree.js"></script>
+</body>
+</html>
