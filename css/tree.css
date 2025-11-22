@@ -1,221 +1,58 @@
-/* --- 트리 꾸미기 페이지 전용 스타일 --- */
+/* 장식 종류별 스타일 (이모지 버전으로 대체) */
 
-.tree-main {
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.decorator-container {
-    display: flex;
-    gap: 30px;
-    margin-top: 30px;
-}
-
-/* 1. 장식 팔레트 */
-.ornament-palette {
-    flex: 0 0 200px; /* 고정 너비 */
-    background-color: #FFF;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: var(--shadow-light);
-    height: 600px; /* 트리 영역 높이와 맞춤 */
-}
-
-.ornaments-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-/* 장식 아이템 기본 스타일 */
+/* 장식 아이템 기본 스타일 재정의 (이모지를 담기 위해) */
 .ornament {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 50px; /* 크기 통일 */
+    height: 50px; /* 크기 통일 */
+    border-radius: 5px; /* 모서리를 둥글게 */
+    background-color: transparent !important; /* 배경색 투명 */
+    box-shadow: none !important; /* 그림자 제거 */
     cursor: grab;
     transition: transform 0.1s;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2em; /* 이모지 크기 설정 */
+    line-height: 1;
 }
 
 .ornament:active {
     cursor: grabbing;
 }
 
-/* 장식 종류별 스타일 (세련된 버전 유지) */
-
-/* 1. 크리스탈 레드 볼 */
-.ball-red { 
-    background: radial-gradient(circle at 70% 30%, #FF99AA, #C0392B); 
-    box-shadow: 0 0 15px rgba(192, 57, 43, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.8);
+/* 1. 골드 스타 (⭐️) */
+.ball-red::before {
+    content: "⭐️"; 
 }
 
-/* 2. 에메랄드 그린 볼 */
-.ball-green { 
-    background: radial-gradient(circle at 70% 30%, #76FF76, #27AE60); 
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.8);
+/* 2. 하트 (❤️) */
+.ball-green::before {
+    content: "❤️";
 }
 
-/* 3. 샤이닝 골드 스타 */
-.star-gold { 
-    background-color: var(--color-gold-accent); 
-    border-radius: 0;
-    /* 별 모양 유지 */
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    box-shadow: 0 0 10px var(--color-gold-accent);
+/* 3. 브라운 하트 (🤎) */
+.star-gold::before {
+    content: "🤎"; 
 }
 
-/* 4. 실버 캔디 지팡이 (크기 변경하여 캔디 모양 강조) */
-.candy-cane { 
-    width: 25px;
-    height: 45px;
-    background: linear-gradient(45deg, #E0E0E0 0%, #FFFFFF 50%, var(--color-red-christmas) 50%, var(--color-red-christmas) 100%);
-    border-radius: 5px;
-    transform: rotate(15deg);
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+/* 4. 실버 (🩶) */
+.candy-cane::before {
+    content: "🩶";
+    /* candy-cane의 기존 크기/변형 설정은 무시합니다. */
 }
 
-/* 5. 로열 블루 선물 상자 */
-.gift-box {
-    width: 45px;
-    height: 45px;
-    background-color: #3498DB; /* 로열 블루 */
-    border-radius: 5px;
-    /* 리본 디자인 */
-    box-shadow: inset 0 0 0 6px var(--color-gold-accent); 
+/* 5. 오렌지 원 (🟠) */
+.gift-box::before {
+    content: "🟠";
 }
 
-/* 6. 레이스 눈송이 */
-.snowflake { 
-    background: none; /* 배경 제거 */
-    border-radius: 0;
-    border: none;
-    width: 40px;
-    height: 40px;
-    /* 복잡한 별 모양을 사용하여 레이스 느낌 구현 */
-    clip-path: polygon(50% 0%, 65% 15%, 100% 15%, 85% 35%, 100% 50%, 85% 65%, 100% 85%, 65% 85%, 50% 100%, 35% 85%, 0% 85%, 15% 65%, 0% 50%, 15% 35%, 0% 15%, 35% 15%);
-    background-color: #FFFFFF; 
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+/* 6. 옐로우 원 (🟡) */
+.snowflake::before { 
+    content: "🟡";
 }
 
-
-/* 2. 트리 영역 */
-.tree-area {
-    flex: 1;
-    position: relative;
-    height: 600px;
-    background-color: #eee; /* 드롭 영역 표시 */
-    border: 3px dashed var(--color-green-christmas);
-    border-radius: 10px;
-    overflow: hidden; /* 장식의 이동 범위 제한 */
-    background: linear-gradient(to bottom, #F8F8F8 0%, #DCDCDC 100%);
-}
-
-.main-tree {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 90%;
-    background-color: var(--color-green-christmas);
-    clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* 삼각형 (간단한 트리 모양) */
-    border-radius: 10% / 50%;
-}
-
-/* 드롭된 장식 아이템 (트리 위에서) */
-.tree-area .ornament {
-    position: absolute;
-    /* 드래그 앤 드롭 시 JavaScript에서 위치를 지정합니다. */
-}
-
-/* --- 공통 모달(팝업) 스타일 --- */
-.modal {
-    display: none; /* 기본적으로 숨김 */
-    position: fixed;
-    z-index: 2000; /* 모든 요소 위에 */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.7); /* 반투명 배경 */
-}
-
-.modal-content {
-    background-color: var(--color-white-snow);
-    color: var(--color-black-text);
-    margin: 15% auto; /* 화면 중앙 배치 */
-    padding: 30px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    position: relative;
-    font-family: var(--font-primary);
-}
-
-.modal-content h2 {
-    color: var(--color-button-dark-red);
-    border-bottom: 1px solid var(--color-gold-accent);
-    padding-bottom: 10px;
-    margin-top: 0;
-}
-
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: var(--color-red-christmas);
-}
-
-/* --- 메모 입력 폼 내부 스타일 --- */
-#memo-input-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-#input-memo-text {
-    width: 100%;
-    min-height: 100px;
-    padding: 10px;
-    border: 2px solid var(--color-green-christmas);
-    border-radius: 5px;
-    resize: none; /* 크기 변경 불가 */
-    font-family: var(--font-primary);
-    font-size: 1em;
-    background-color: white;
-    color: var(--color-black-text);
-}
-
-/* --- 메모 열람 텍스트 스타일 --- */
-#view-memo-text {
-    white-space: pre-wrap; /* 줄바꿈 유지 */
-    font-size: 1.1em;
-    padding: 10px;
-    background-color: #f7f7f7;
-    border-radius: 5px;
-    border: 1px dashed #ccc;
-}
-
-/* --- 모든 메모 장식에 공통 적용 --- */
-.ornament.memo-ornament, 
-.ornament[data-memo] {
-    cursor: pointer !important;
-    box-shadow: 0 0 10px var(--color-gold-accent), 0 0 5px rgba(0,0,0,0.5); /* 메모임을 강조하는 그림자 */
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.ornament.memo-ornament:hover,
-.ornament[data-memo]:hover {
-    transform: scale(1.1);
+/* 메모 장식 (기존 메모지 모양 아이템이 없으므로 이모지로 대체) */
+.memo-note::before {
+    content: "📌"; /* 핀 모양 이모지로 변경 */
 }
