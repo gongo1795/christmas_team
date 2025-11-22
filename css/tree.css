@@ -197,3 +197,47 @@
 .ornament[data-memo]:hover {
     transform: scale(1.15); /* 호버 시 약간 크게 */
 }
+
+/* --- 이 부분은 style.css에 추가/확인해야 합니다. --- */
+/* (기존 색상 팔레트, 폰트 정의 등은 그대로 두고, 눈 효과 부분만 확인하세요) */
+
+/* ... (기존 네비게이션 스타일 끝) ... */
+
+/* --- 눈 효과 (Snow Effect) 스타일 --- */
+
+/* 1. 눈 컨테이너 (스크롤 방지 및 화면 전체 덮기) */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 999; 
+    overflow: hidden;
+}
+
+/* 2. 개별 눈송이 기본 스타일 (모양 정의) */
+.snowflake {
+    position: absolute;
+    width: 10px; /* 눈송이 크기 */
+    height: 10px;
+    background: #fff; /* 흰색으로 보이도록 정의 */
+    border-radius: 50%; /* 원형 모양 */
+    opacity: 0.8;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    animation: fall linear infinite; 
+}
+
+/* 3. 눈 내리는 애니메이션 */
+@keyframes fall {
+    0% {
+        transform: translate3d(0, -100px, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate3d(0, 100vh, 0) rotate(360deg);
+        opacity: 0; 
+    }
+}
+/* ... (눈 토글 버튼 스타일은 하단에 이미 있습니다.) ... */

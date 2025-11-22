@@ -1,82 +1,199 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎄 트리 꾸미기</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Hahmlet:wght@100..900&display=swap" rel="stylesheet">
-  
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/tree.css"> </head>
-<body>
-    <div id="snow-container" class="snow-container"></div> 
-    
-    <header class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo"><a href="index.html">X-MAS LAB</a></div>
-            <nav class="nav-links">
-                <a href="index.html">메인</a>
-                <a href="letter.html">편지 보내기</a>
-                <a href="tree-decorator.html">트리 꾸미기</a>
-            </nav>
-        </div>
-    </header>
+/* --- 트리 꾸미기 페이지 전용 스타일 --- */
 
-    <main class="tree-main">
-        <h1>🌲 나만의 크리스마스 트리 꾸미기</h1>
-        <p class="subtitle">장식 아이템을 드래그하여 트리 위에 드롭하세요. (새로고침해도 유지되며, 메모 팝업이 뜹니다!)</p>
-        
-        <div class="decorator-container">
-            
-            <div class="ornament-palette">
-                <h2>🎁 장식 목록</h2>
-                <div class="ornaments-list">
-                    <div class="ornament ball-red" draggable="true" data-type="ball-red"></div>
-                    
-                    <div class="ornament ball-green" draggable="true" data-type="ball-green"></div>
-                    
-                    <div class="ornament star-gold" draggable="true" data-type="star-gold"></div>
-                    
-                    <div class="ornament candy-cane" draggable="true" data-type="candy-cane"></div>
-                    
-                    <div class="ornament gift-box" draggable="true" data-type="gift-box"></div>
-                    
-                    <div class="ornament snowflake" draggable="true" data-type="snowflake"></div>
-                </div>
-                <button id="reset-button" class="button-red">트리 초기화 🗑️</button>
-            </div>
-            
-            <div id="tree-area" class="tree-area">
-                <div class="main-tree"></div> 
-            </div>
-        </div>
-    </main>
+.tree-main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
 
-    <div id="input-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" id="close-input-modal">&times;</span>
-            <h2>새 메모 작성</h2>
-            <form id="memo-input-form">
-                <textarea id="input-memo-text" placeholder="트리에 붙일 소원이나 메모를 작성하세요 (최대 100자)" maxlength="100" required></textarea>
-                <button type="submit" class="button-red">붙이기 📌</button>
-            </form>
-        </div>
-    </div>
-    
-    <div id="view-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" id="close-view-modal">&times;</span>
-            <h2>트리 메모</h2>
-            <p id="view-memo-text"></p>
-        </div>
-    </div>
-    
-    <button id="snow-toggle">❄️</button> 
-    
-    <script src="js/tree.js"></script>
-    <script src="js/script.js"></script>
-</body>
-</html>
+/* --- Bangers 폰트 크기 조정 (깨짐 방지) --- */
+
+/* 페이지 메인 제목 (h1) */
+.tree-main h1 {
+    font-family: var(--font-bangers);
+    font-size: 2.8em; /* Bangers 폰트의 크기를 줄여 오버플로우를 방지합니다. */
+    margin-bottom: 5px;
+}
+
+/* 장식 목록 제목 (h2) */
+.ornament-palette h2 {
+    font-family: var(--font-bangers);
+    font-size: 1.6em; /* 크기 조정 */
+    color: var(--color-black-text);
+    border-bottom: 2px dashed var(--color-green-christmas);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.decorator-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* 1. 장식 팔레트 */
+.ornament-palette {
+    flex: 0 0 200px; /* 고정 너비 */
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    height: 600px; /* 트리 영역 높이와 맞춤 */
+}
+
+.ornaments-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* --- 장식 아이템 기본 스타일 (이모지용 재정의) --- */
+.ornament {
+    width: 50px; /* 크기 통일 */
+    height: 50px; /* 크기 통일 */
+    border-radius: 5px; /* 모서리를 둥글게 */
+    background-color: transparent !important; /* 배경색 투명 */
+    box-shadow: none !important; /* 그림자 제거 */
+    cursor: grab;
+    transition: transform 0.1s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2em; /* 이모지 크기 설정 */
+    line-height: 1;
+}
+
+.ornament:active {
+    cursor: grabbing;
+}
+
+/* 장식 종류별 이모지 스타일 */
+.ball-red::before { content: "⭐️"; } 
+.ball-green::before { content: "❤️"; }
+.star-gold::before { content: "🤎"; }
+.candy-cane::before { content: "🩶"; }
+.gift-box::before { content: "🟠"; }
+.snowflake::before { content: "🟡"; }
+.memo-note::before { content: "📌"; }
+
+/* 2. 트리 영역 */
+.tree-area {
+    flex: 1;
+    position: relative;
+    height: 600px;
+    background-color: #eee; /* 드롭 영역 표시 */
+    border: 3px dashed var(--color-green-christmas);
+    border-radius: 10px;
+    overflow: hidden; /* 장식의 이동 범위 제한 */
+    background: linear-gradient(to bottom, #F8F8F8 0%, #DCDCDC 100%);
+}
+
+.main-tree {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 90%;
+    background-color: var(--color-green-christmas);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* 삼각형 (간단한 트리 모양) */
+    border-radius: 10% / 50%;
+}
+
+/* 드롭된 장식 아이템 (트리 위에서) */
+.tree-area .ornament {
+    position: absolute;
+}
+
+/* --- 공통 모달(팝업) 스타일 --- */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); 
+}
+
+.modal-content {
+    background-color: var(--color-white-snow);
+    color: var(--color-black-text);
+    margin: 15% auto; 
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    font-family: var(--font-primary);
+}
+
+.modal-content h2 {
+    color: var(--color-button-dark-red);
+    border-bottom: 1px solid var(--color-gold-accent);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--color-red-christmas);
+}
+
+/* --- 메모 입력 폼 내부 스타일 --- */
+#memo-input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#input-memo-text {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 2px solid var(--color-green-christmas);
+    border-radius: 5px;
+    resize: none; 
+    font-family: var(--font-primary);
+    font-size: 1em;
+    background-color: white;
+    color: var(--color-black-text);
+}
+
+/* --- 메모 열람 텍스트 스타일 --- */
+#view-memo-text {
+    white-space: pre-wrap; 
+    font-size: 1.1em;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    border: 1px dashed #ccc;
+}
+
+/* --- 모든 메모 장식에 공통 적용 --- */
+.ornament.memo-ornament, 
+.ornament[data-memo] {
+    cursor: pointer !important;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 2px rgba(0,0,0,0.5); /* 그림자를 이모지 주변에 작게 설정 */
+    border-radius: 50%; /* 이모지 주변을 원형으로 강조 */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ornament.memo-ornament:hover,
+.ornament[data-memo]:hover {
+    transform: scale(1.15); /* 호버 시 약간 크게 */
+}
