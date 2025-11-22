@@ -17,10 +17,14 @@
     border: 3px solid var(--color-red-christmas); /* 크리스마스 테두리 */
 }
 
+/* h1 스타일: Bangers 폰트 적용 */
 .letter-container h1 {
     text-align: center;
     color: var(--color-black-text);
     margin-bottom: 10px;
+    
+    /* Bangers 폰트 적용 (이전 단계에서 설정한 변수 사용) */
+    font-family: var(--font-bangers); 
 }
 
 .subtitle {
@@ -50,6 +54,8 @@ input[type="text"], input[type="email"], textarea {
     font-size: 1em;
     transition: border-color 0.3s;
     background-color: #fff;
+    /* Hahmlet 폰트가 적용되도록 font-family를 지정하지 않습니다.
+       (style.css의 body/--font-primary를 따릅니다.) */
 }
 
 input:focus, textarea:focus {
@@ -82,15 +88,4 @@ textarea {
 
 .feedback-error {
     color: var(--color-red-christmas);
-}
-
-/* css/letter.css 파일의 가장 아래에 아래 내용을 추가합니다. */
-
-.letter-container h1 {
-    text-align: center;
-    color: var(--color-black-text);
-    margin-bottom: 10px;
-    
-    /* Bangers 폰트 적용 */
-    font-family: var(--font-bangers); 
 }
