@@ -12,14 +12,14 @@
 /* 페이지 메인 제목 (h1) */
 .tree-main h1 {
     font-family: var(--font-bangers);
-    font-size: 2.8em; 
+    font-size: 2.8em; /* Bangers 폰트 크기 안정화 */
     margin-bottom: 5px;
 }
 
 /* 장식 목록 제목 (h2) */
 .ornament-palette h2 {
     font-family: var(--font-bangers);
-    font-size: 1.6em; 
+    font-size: 1.6em; /* Bangers 폰트 크기 안정화 */
     color: var(--color-black-text);
     border-bottom: 2px dashed var(--color-green-christmas);
     padding-bottom: 10px;
@@ -70,14 +70,14 @@
     cursor: grabbing;
 }
 
-/* 장식 종류별 이모지 스타일 (display: inline-block 추가하여 겹침 방지) */
+/* 장식 종류별 이모지 스타일 (display: inline-block 추가하여 렌더링 안정화) */
 .ball-red::before { content: "⭐️"; display: inline-block; } 
 .ball-green::before { content: "❤️"; display: inline-block; }
 .star-gold::before { content: "🤎"; display: inline-block; }
 .candy-cane::before { content: "🩶"; display: inline-block; }
 .gift-box::before { content: "🟠"; display: inline-block; }
 .snowflake::before { content: "🟡"; display: inline-block; }
-.memo-note::before { content: "📌"; display: inline-block; }
+/* memo-note는 팔레트에서 제거되었으므로 스타일은 비워둠 */
 
 /* 2. 트리 영역 */
 .tree-area {
@@ -185,7 +185,6 @@
 }
 
 /* --- 모든 메모 장식에 공통 적용 --- */
-.ornament.memo-ornament, 
 .ornament[data-memo] {
     cursor: pointer !important;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 2px rgba(0,0,0,0.5); 
@@ -193,7 +192,6 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.ornament.memo-ornament:hover,
 .ornament[data-memo]:hover {
     transform: scale(1.15); 
 }
