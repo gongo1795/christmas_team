@@ -128,8 +128,8 @@ body {
 
 @keyframes fall {
     0% {
-        transform: translate3d(0, -100px, 0) rotate(0deg);
-        opacity: 0.8;
+        transform: translate3d(0, -20%, 0) rotate(0deg);
+        opacity: 0;
     }
     100% {
         transform: translate3d(0, 100vh, 0) rotate(360deg);
