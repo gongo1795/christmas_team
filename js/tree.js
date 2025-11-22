@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let memoDropPosition = { left: 0, top: 0, type: null }; 
 
     const STORAGE_KEY = 'christmasTreeState_Memo'; 
+    let currentZIndex = 10; // 장식의 기본 Z-index 시작 값
 
     // --- 1. 로컬 저장소 기능 ---
     function saveTreeState(state) {
@@ -33,12 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return state.length > 0 ? Math.max(...state.map(o => o.id)) + 1 : 1;
     }
 
-    // --- 2. 장식 엘리먼트 생성 (메모 기능 포함) ---
+    // --- 2. 장식 엘리먼트 생성 (Z-index 적용) ---
     function createOrnamentElement(data) {
         const ornament = document.createElement('div');
         
         ornament.classList.add('ornament', data.type); 
         ornament.setAttribute('data-id', data.id);
+        
+        // 장식의 z-index 적용 (저장된 값이 없으면 기본값 10)
+        ornament.style.zIndex = data.zIndex || 10; 
         
         // 메모 기능이 있는 장식 처리 (모든 장식은 메모 데이터를 가집니다)
         if (data.memo) {
@@ -50,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 viewModal.style.display = 'block';
             });
             
-            // 기본 메모 노트에만 아이콘 표시 (필요에 따라)
             if (data.type === 'memo-note') {
                  ornament.innerHTML = '📝'; 
             }
@@ -112,6 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (item) {
                     item.left = ornament.style.left;
                     item.top = ornament.style.top;
+                    // 드래그 완료 후 z-index를 최상위로 올려서 겹침 문제 해결
+                    currentZIndex++; 
+                    item.zIndex = currentZIndex;
+                    ornament.style.zIndex = currentZIndex;
+
                     saveTreeState(state);
                 }
             }
@@ -175,20 +183,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 6. 트리 장식 추가 및 저장 함수 ---
+    // --- 6. 트리 장식 추가 및 저장 함수 (Z-index 증가 및 저장) ---
     function addOrnamentToTree(type, left, top, memo) { 
+        // Z-index 증가 및 적용 (새로 붙이는 장식은 항상 위에 오도록)
+        currentZIndex++; 
+
         const newOrnamentData = {
             id: getNextId(),
             type: type,
             left: left,
             top: top,
-            memo: memo 
+            memo: memo,
+            zIndex: currentZIndex // z-index 값을 저장 데이터에 추가
         };
 
         // 1. DOM에 추가
         const newOrnament = createOrnamentElement(newOrnamentData);
         newOrnament.style.left = left;
         newOrnament.style.top = top;
+        newOrnament.style.zIndex = currentZIndex; // DOM에도 적용
         treeArea.appendChild(newOrnament);
 
         // 2. 로컬 저장소에 저장
@@ -201,23 +214,34 @@ document.addEventListener('DOMContentLoaded', () => {
     resetButton.addEventListener('click', () => {
         if (confirm('트리의 모든 장식과 메모를 초기화하시겠습니까?')) {
             localStorage.removeItem(STORAGE_KEY);
-            treeArea.innerHTML = '<div class="main-tree"></div>'; // DOM 초기화
+            treeArea.innerHTML = '<div class="main-tree"></div>'; 
             alert('트리가 초기화되었습니다.');
             loadInitialState();
         }
     });
 
-    // --- 8. 초기 상태 로드 함수 ---
+    // --- 8. 초기 상태 로드 함수 (Z-index 복원) ---
     function loadInitialState() {
-        treeArea.innerHTML = '<div class="main-tree"></div>'; // 초기화
+        treeArea.innerHTML = '<div class="main-tree"></div>'; 
         const savedState = loadTreeState();
+        
+        let maxZ = 10; 
         
         savedState.forEach(data => {
             const ornament = createOrnamentElement(data);
             ornament.style.left = data.left;
             ornament.style.top = data.top;
+            ornament.style.zIndex = data.zIndex || 10; // 저장된 z-index 적용
             treeArea.appendChild(ornament);
+            
+            // 가장 높은 z-index 값을 찾습니다.
+            if (data.zIndex > maxZ) {
+                maxZ = data.zIndex;
+            }
         });
+
+        // 전역 Z-index 카운터를 최신 값으로 업데이트합니다.
+        currentZIndex = maxZ + 1; 
     }
 
     // --- 9. 모달 닫기 기능 ---
