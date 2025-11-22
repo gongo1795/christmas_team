@@ -115,3 +115,70 @@ body {
 .nav-links a:hover {
     color: var(--color-green-christmas);
 }
+
+/* --- 눈 효과 (Snow Effect) 스타일 --- */
+
+/* 1. 눈 컨테이너 (스크롤 방지 및 화면 전체 덮기) */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 눈이 클릭을 방해하지 않도록 설정 */
+    z-index: 999; /* 네비게이션바(1000) 바로 아래 */
+    overflow: hidden;
+}
+
+/* 2. 개별 눈송이 기본 스타일 */
+.snowflake {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    animation: fall linear infinite; /* 눈 내리는 애니메이션 적용 */
+}
+
+/* 3. 눈 내리는 애니메이션 */
+@keyframes fall {
+    0% {
+        transform: translate3d(0, -100px, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate3d(0, 100vh, 0) rotate(360deg);
+        opacity: 0.2;
+    }
+}
+
+/* 4. 애니메이션 일시 정지/재개 (JS에서 사용) */
+.snow-container.paused .snowflake {
+    animation-play-state: paused; /* 이 클래스가 추가되면 애니메이션 정지 */
+}
+
+/* 5. 눈 토글 버튼 스타일 */
+#snow-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001; /* 네비게이션바 위에 배치 */
+    padding: 10px 15px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: var(--color-gold-accent);
+    color: var(--color-black-text);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#snow-toggle:hover {
+    background-color: #e0b400;
+}
