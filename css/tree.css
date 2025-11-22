@@ -62,8 +62,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.2em; 
-    line-height: 1;
+    font-size: 2em; 
 }
 
 .ornament:active {
@@ -71,12 +70,12 @@
 }
 
 /* 장식 종류별 이모지 스타일 (display: inline-block 추가하여 렌더링 안정화) */
-.ball-red::before { content: "⭐️"; display: inline-block; } 
-.ball-green::before { content: "❤️"; display: inline-block; }
-.star-gold::before { content: "🤎"; display: inline-block; }
-.candy-cane::before { content: "🩶"; display: inline-block; }
-.gift-box::before { content: "🟠"; display: inline-block; }
-.snowflake::before { content: "🟡"; display: inline-block; }
+.ball-red::before { content: "⭐️"; } 
+.ball-green::before { content: "❤️"; }
+.star-gold::before { content: "🤎"; }
+.candy-cane::before { content: "🩶"; }
+.gift-box::before { content: "🟠"; }
+.snowflake::before { content: "🟡"; }
 
 /* 2. 트리 영역 */
 .tree-area {
