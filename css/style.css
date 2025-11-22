@@ -46,7 +46,7 @@ body {
     color: var(--color-white-snow);
 }
 .button-red:hover {
-    background-color: #5A0F0D; 
+    background-color: #5A0F0D;
     transform: translateY(-2px);
 }
 
@@ -55,7 +55,7 @@ body {
     color: var(--color-white-snow);
 }
 .button-green:hover {
-    background-color: #2F4738; 
+    background-color: #2F4738;
     transform: translateY(-2px);
 }
 
@@ -103,9 +103,7 @@ body {
     color: var(--color-green-christmas);
 }
 
-/* --- 눈 효과 (Snow Effect) 스타일 --- */
-
-/* 1. 눈 컨테이너 */
+/* --- 눈 효과 (Snow Effect) 스타일 (FIXED) --- */
 .snow-container {
     position: fixed;
     top: 0;
@@ -117,19 +115,17 @@ body {
     overflow: hidden;
 }
 
-/* 2. 개별 눈송이 기본 스타일 (눈 모양 FIX) */
 .snowflake {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: #fff; /* 흰색으로 보이도록 정의 */
-    border-radius: 50%;
+    background: #fff; 
+    border-radius: 50%; 
     opacity: 0.8;
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
     animation: fall linear infinite; 
 }
 
-/* 3. 눈 내리는 애니메이션 */
 @keyframes fall {
     0% {
         transform: translate3d(0, -100px, 0) rotate(0deg);

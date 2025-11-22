@@ -1,16 +1,13 @@
-// js/tree.js 파일 전체 내용
 document.addEventListener('DOMContentLoaded', () => {
     const treeArea = document.getElementById('tree-area');
     const resetButton = document.getElementById('reset-button');
     
-    // 모달 요소들
     const inputModal = document.getElementById('input-modal');
     const viewModal = document.getElementById('view-modal');
     const inputForm = document.getElementById('memo-input-form');
     const inputMemoText = document.getElementById('input-memo-text');
     const viewMemoText = document.getElementById('view-memo-text');
 
-    // 모달 닫기 버튼
     const closeInputModal = document.getElementById('close-input-modal');
     const closeViewModal = document.getElementById('close-view-modal');
 
@@ -18,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let memoDropPosition = { left: 0, top: 0, type: null }; 
 
     const STORAGE_KEY = 'christmasTreeState_Memo'; 
-    let currentZIndex = 10; // 장식의 기본 Z-index 시작 값
+    let currentZIndex = 10; 
 
     // --- 1. 로컬 저장소 기능 ---
     function saveTreeState(state) {
@@ -42,25 +39,17 @@ document.addEventListener('DOMContentLoaded', () => {
         ornament.classList.add('ornament', data.type); 
         ornament.setAttribute('data-id', data.id);
         
-        // 장식의 z-index 적용 
         ornament.style.zIndex = data.zIndex || 10; 
         
-        // 메모 기능이 있는 장식 처리 
         if (data.memo) {
             ornament.setAttribute('data-memo', data.memo); 
             
-            // 클릭 시 메모 열람 모달 띄우기
             ornament.addEventListener('click', () => {
                 viewMemoText.textContent = data.memo;
                 viewModal.style.display = 'block';
             });
-            
-            if (data.type === 'memo-note') {
-                 ornament.innerHTML = '📝'; 
-            }
         }
         
-        // 드래그 이벤트 리스너 추가 (위치 이동 기능)
         addDragListeners(ornament);
         
         return ornament;
@@ -148,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const rect = treeArea.getBoundingClientRect();
         
-        // 드롭된 위치를 퍼센트로 계산
         const dropX = ((e.clientX - rect.left) / rect.width) * 100;
         const dropY = ((e.clientY - rect.top) / rect.height) * 100;
         
@@ -172,22 +160,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const memo = inputMemoText.value.trim();
         
         if (memo) {
-            // 메모 데이터와 저장된 위치를 사용
             addOrnamentToTree(
                 memoDropPosition.type, 
                 memoDropPosition.left, 
                 memoDropPosition.top, 
                 memo
             );
-            inputModal.style.display = 'none'; // 모달 닫기
+            inputModal.style.display = 'none'; 
         } else {
             alert('메모 내용을 입력해 주세요.');
         }
     });
 
-    // --- 6. 트리 장식 추가 및 저장 함수 (Z-index 증가 및 저장) ---
+    // --- 6. 트리 장식 추가 및 저장 함수 ---
     function addOrnamentToTree(type, left, top, memo) { 
-        // Z-index 증가 및 적용 (새로 붙이는 장식은 항상 위에 오도록)
         currentZIndex++; 
 
         const newOrnamentData = {
@@ -196,17 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
             left: left,
             top: top,
             memo: memo,
-            zIndex: currentZIndex // z-index 값을 저장 데이터에 추가
+            zIndex: currentZIndex 
         };
 
-        // 1. DOM에 추가
         const newOrnament = createOrnamentElement(newOrnamentData);
         newOrnament.style.left = left;
         newOrnament.style.top = top;
-        newOrnament.style.zIndex = currentZIndex; // DOM에도 적용
+        newOrnament.style.zIndex = currentZIndex; 
         treeArea.appendChild(newOrnament);
 
-        // 2. 로컬 저장소에 저장
         const state = loadTreeState();
         state.push(newOrnamentData);
         saveTreeState(state);
@@ -222,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 8. 초기 상태 로드 함수 (Z-index 복원) ---
+    // --- 8. 초기 상태 로드 함수 ---
     function loadInitialState() {
         treeArea.innerHTML = '<div class="main-tree"></div>'; 
         const savedState = loadTreeState();
@@ -233,16 +217,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const ornament = createOrnamentElement(data);
             ornament.style.left = data.left;
             ornament.style.top = data.top;
-            ornament.style.zIndex = data.zIndex || 10; // 저장된 z-index 적용
+            ornament.style.zIndex = data.zIndex || 10; 
             treeArea.appendChild(ornament);
             
-            // 가장 높은 z-index 값을 찾습니다.
             if (data.zIndex > maxZ) {
                 maxZ = data.zIndex;
             }
         });
 
-        // 전역 Z-index 카운터를 최신 값으로 업데이트합니다.
         currentZIndex = maxZ + 1; 
     }
 
