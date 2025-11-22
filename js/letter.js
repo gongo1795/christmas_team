@@ -8,7 +8,7 @@ document.getElementById('letter-form').addEventListener('submit', function(event
 
     // EmailJS 템플릿 파라미터는 폼의 'name' 속성을 따릅니다.
     // ⚠️ SERVICE_ID와 TEMPLATE_ID를 실제 EmailJS 설정에 맞게 변경하세요!
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form)
+    emailjs.sendForm('service_obt6ibv', 'template_7ilulin', form)
         .then(function() {
             feedback.textContent = '🎉 편지가 성공적으로 산타에게 전달되었습니다! 🎉';
             feedback.classList.add('feedback-success');
