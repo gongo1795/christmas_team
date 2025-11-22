@@ -10,7 +10,10 @@
 .hero-section {
     position: relative;
     background-color: var(--color-black-text); 
-    background-image: url('/assets/images/Gemini_Generated_Image_hyblr8hyblr8hybl.png');
+    
+    /* 🚨 이 부분을 수정: 절대 경로 대신 상대 경로 사용 */
+    background-image: url('../assets/images/Gemini_Generated_Image_hyblr8hyblr8hybl.png');
+    
     background-size: cover;        
     background-position: center;   
     background-repeat: no-repeat;  
@@ -24,7 +27,6 @@
     margin-bottom: 40px;
     box-shadow: var(--shadow-light); 
     
-    /* 👈 새로 추가할 코드: 오버레이를 위한 z-index 설정 */
     z-index: 1; 
 }
 
