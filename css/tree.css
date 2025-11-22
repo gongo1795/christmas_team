@@ -70,12 +70,12 @@
 }
 
 /* 장식 종류별 이모지 스타일 (display: inline-block 추가하여 렌더링 안정화) */
-.ball-red::before { content: "⭐️"; } 
+.ball-red::before { content: "⭐️"; display: inline-block; transform: scale(0.7); } 
 .ball-green::before { content: "❤️"; }
 .star-gold::before { content: "🤎"; }
 .candy-cane::before { content: "🩶"; }
 .gift-box::before { content: "🟠"; }
-.ornaments-list .snowflake::before { content: "🟡"; }
+.ornaments-list .snowflake::before { content: "🟡"; display: inline-block; transform: scale(0.7); }
 
 /* 2. 트리 영역 */
 .tree-area {
