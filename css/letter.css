@@ -13,7 +13,7 @@
     background-color: #FFF;
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* 입체감 */
+    box-shadow: 0 10px 30px #2C1D1D; /* 입체감 */
     border: 3px solid var(--color-red-christmas); /* 크리스마스 테두리 */
 }
 
