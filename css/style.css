@@ -1,10 +1,12 @@
 :root {
     /* 색상 팔레트 */
     --color-white-snow: #F0F0F0;
-    --color-black-text: #1A1A1A;
-    --color-red-christmas: #C0392B;
-    --color-green-christmas: #27AE60;
-    --color-gold-accent: #FFD700;
+    --color-dark-brown-background: #2C1D1D; /* 더 어두운 고동색 배경색 추가 */
+    --color-black-text: #1A1A1A; /* 기존 블랙 텍스트 유지 (필요 시 수정 가능) */
+    --color-red-christmas: #72130F; /* 기존 빨간색 유지 */
+    --color-green-christmas: #313F38;
+    --color-gold-accent: #B07B2D;
+    --color-button-dark-red: #72130F; /* 새로운 버튼 색상 추가 */
 
     /* Bangers (영문), Hahmlet (한글) 폰트 설정 */
     --font-bangers: 'Bangers', cursive;
@@ -34,11 +36,11 @@
 }
 
 body {
-    background-color: var(--color-white-snow);
-    color: var(--color-black-text);
+    background-color: var(--color-dark-brown-background); /* 이 부분을 수정합니다! */
+    color: var(--color-white-snow); /* 배경이 어두워지므로 텍스트 색상을 흰색 계열로 변경 */
     font-family: var(--font-primary);
     margin: 0;
-    padding-top: 70px; /* 네비게이션 높이만큼 패딩 */
+    padding-top: 70px;
     line-height: 1.6;
 }
 
@@ -56,11 +58,11 @@ body {
 }
 
 .button-red {
-    background-color: var(--color-red-christmas);
+    background-color: var(--color-button-dark-red); /* 이 부분을 수정합니다! */
     color: var(--color-white-snow);
 }
 .button-red:hover {
-    background-color: #A93224;
+    background-color: #5A0F0D; /* 호버 시 조금 더 어둡게 */
     transform: translateY(-2px);
 }
 
@@ -96,11 +98,12 @@ body {
 }
 
 .nav-logo a {
-    color: var(--color-red-christmas);
+    color: var(--color-gold-accent); /* 가독성을 위해 골드 색상으로 변경 */
     font-size: 1.8em;
     font-weight: 900;
     text-decoration: none;
     letter-spacing: 2px;
+    font-family: var(--font-bangers); 
 }
 
 .nav-links a {
@@ -150,7 +153,7 @@ body {
     }
     100% {
         transform: translate3d(0, 100vh, 0) rotate(360deg);
-        opacity: 0.2;
+        opacity: 0; /* 100%에서 투명하게 만들어 사라지게 합니다. */
     }
 }
 
