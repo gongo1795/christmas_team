@@ -100,3 +100,105 @@
     position: absolute;
     /* 드래그 앤 드롭 시 JavaScript에서 위치를 지정합니다. */
 }
+
+/* --- 메모 장식 스타일 --- */
+.ornament.memo-note {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-gold-accent);
+    border: 3px solid var(--color-button-dark-red); /* #72130F */
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em;
+    transition: transform 0.1s;
+    text-shadow: none;
+    line-height: 1;
+}
+
+.ornament.memo-note::before {
+    content: "📝"; /* 메모 아이콘 */
+}
+
+.ornament.memo-note:hover {
+    transform: scale(1.05);
+}
+
+/* --- 공통 모달(팝업) 스타일 --- */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 2000; /* 모든 요소 위에 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); /* 반투명 배경 */
+}
+
+.modal-content {
+    background-color: var(--color-white-snow);
+    color: var(--color-black-text);
+    margin: 15% auto; /* 화면 중앙 배치 */
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    font-family: var(--font-primary);
+}
+
+.modal-content h2 {
+    color: var(--color-button-dark-red);
+    border-bottom: 1px solid var(--color-gold-accent);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--color-red-christmas);
+}
+
+/* --- 메모 입력 폼 내부 스타일 --- */
+#memo-input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#input-memo-text {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 2px solid var(--color-green-christmas);
+    border-radius: 5px;
+    resize: none; /* 크기 변경 불가 */
+    font-family: var(--font-primary);
+    font-size: 1em;
+    background-color: white;
+    color: var(--color-black-text);
+}
+
+/* --- 메모 열람 텍스트 스타일 --- */
+#view-memo-text {
+    white-space: pre-wrap; /* 줄바꿈 유지 */
+    font-size: 1.1em;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    border: 1px dashed #ccc;
+}
