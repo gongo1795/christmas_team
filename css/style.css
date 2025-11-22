@@ -6,13 +6,12 @@
     --color-green-christmas: #27AE60;
     --color-gold-accent: #FFD700;
 
-    /* Bangers (영문), Poor Story (한글) 폰트 설정 */
-    /* Bangers는 영문 전용이므로, Poor Story를 백업으로 지정합니다. */
+    /* Bangers (영문), Hahmlet (한글) 폰트 설정 */
     --font-bangers: 'Bangers', cursive;
-    --font-poorstory: 'Poor Story', cursive;
+    --font-hahmlet: 'Hahmlet', serif; /* Poor Story 대신 Hahmlet으로 변경 */
 
     /* 기본 폰트: 한글 가독성을 우선하되, 영문은 Bangers를 기본으로 사용합니다. */
-    --font-primary: var(--font-poorstory); 
+    --font-primary: var(--font-hahmlet); /* 기본 폰트를 Hahmlet으로 변경 */
 }
 
 /* ... (기존 body, 버튼 스타일 등은 그대로 둡니다) ... */
