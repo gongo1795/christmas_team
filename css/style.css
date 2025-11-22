@@ -4,7 +4,7 @@
     --color-dark-brown-background: #2C1D1D; /* 더 어두운 고동색 배경색 추가 */
     --color-black-text: #1A1A1A; /* 기존 블랙 텍스트 유지 (필요 시 수정 가능) */
     --color-red-christmas: #72130F; /* 기존 빨간색 유지 */
-    --color-green-christmas: #313F38;
+    --color-green-christmas: #3a5a4a;
     --color-gold-accent: #B07B2D;
     --color-button-dark-red: #72130F; /* 새로운 버튼 색상 추가 */
 
@@ -71,7 +71,7 @@ body {
     color: var(--color-white-snow);
 }
 .button-green:hover {
-    background-color: #219d55;
+    background-color: #3a5a4a;
     transform: translateY(-2px);
 }
 
