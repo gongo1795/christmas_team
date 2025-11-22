@@ -202,3 +202,21 @@
     border-radius: 5px;
     border: 1px dashed #ccc;
 }
+
+/* --- 새로 추가된 메모 장식들이 마우스 커서를 변경하고, 클릭 가능함을 나타냄 --- */
+.ornament.memo-ornament, 
+.ornament[data-memo] {
+    cursor: pointer !important;
+    box-shadow: 0 0 10px var(--color-gold-accent), 0 0 5px rgba(0,0,0,0.5); /* 메모임을 강조하는 그림자 */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ornament.memo-ornament:hover,
+.ornament[data-memo]:hover {
+    transform: scale(1.1);
+}
+
+/* --- 메모 장식들이 텍스트를 담을 수 없으므로, 모든 장식에 텍스트 아이콘을 제거하고 클릭 기능만 부여합니다. --- */
+/* (memo-note만 📝 아이콘을 사용하도록 JS에서 설정했습니다.) */
+
+/* --- 참고: .ornament.memo-note 스타일은 기존에 50x50 크기로 정의되어 있습니다. --- */

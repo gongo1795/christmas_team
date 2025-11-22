@@ -36,20 +36,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. 장식 엘리먼트 생성 (메모 기능 추가) ---
     function createOrnamentElement(data) {
         const ornament = document.createElement('div');
-        ornament.classList.add('ornament', data.type);
+        
+        // 데이터 타입에 따라 클래스 추가 (예: ball-red-memo, star-gold-memo)
+        ornament.classList.add('ornament', data.type); 
         ornament.setAttribute('data-id', data.id);
         
-        // 메모 노트 특수 처리
-        if (data.type === 'memo-note' && data.memo) {
-            // 메모 내용을 속성에 저장
-            ornament.setAttribute('data-memo', data.memo); 
-            
-            // 클릭 시 메모 열람 모달 띄우기
-            ornament.addEventListener('click', () => {
-                viewMemoText.textContent = data.memo;
-                viewModal.style.display = 'block';
-            });
+        // 모든 장식은 메모이므로 data-memo 속성 추가
+        ornament.setAttribute('data-memo', data.memo); 
+        
+        // 텍스트가 들어갈 수 있도록 아이콘 표시 (기존 메모 노트 스타일과 구분)
+        if (data.type === 'memo-note') {
+             ornament.innerHTML = '📝'; // 기본 메모 노트에만 아이콘 표시
         }
+        
+        // 모든 장식 클릭 시 메모 열람 모달 띄우기
+        ornament.addEventListener('click', () => {
+            viewMemoText.textContent = data.memo;
+            viewModal.style.display = 'block';
+        });
+        
+        // 드래그 이벤트 리스너 추가 (위치 이동 기능)
+        addDragListeners(ornament);
+        
+        return ornament;
+    }
         
         // 드래그 이벤트 리스너 추가 (위치 이동 기능)
         addDragListeners(ornament);
@@ -155,19 +165,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropX = ((e.clientX - rect.left) / rect.width) * 100;
         const dropY = ((e.clientY - rect.top) / rect.height) * 100;
         
-        // 메모 노트일 경우 입력 모달을 띄우고 위치만 저장
-        if (draggedData.type === 'memo-note') {
-            memoDropPosition = { left: `${dropX}%`, top: `${dropY}%` };
-            inputModal.style.display = 'block';
-            inputMemoText.value = '';
-            inputMemoText.focus();
-        } else {
-            // 일반 장식일 경우 바로 추가
-            addOrnamentToTree(draggedData.type, `${dropX}%`, `${dropY}%`);
-        }
+        // 메모 입력을 위해 모달을 띄우고 위치와 타입을 저장
+        memoDropPosition = { left: `${dropX}%`, top: `${dropY}%`, type: draggedData.type };
+        inputModal.style.display = 'block';
+        inputMemoText.value = '';
+        inputMemoText.focus();
         
         draggedData = null;
     });
+
 
     // --- 5. 메모 입력 폼 제출 처리 ---
     inputForm.addEventListener('submit', (e) => {
@@ -175,7 +181,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const memo = inputMemoText.value.trim();
         
         if (memo) {
-            addOrnamentToTree('memo-note', memoDropPosition.left, memoDropPosition.top, memo);
+            // memoDropPosition에 저장된 타입 사용
+            addOrnamentToTree(
+                memoDropPosition.type, 
+                memoDropPosition.left, 
+                memoDropPosition.top, 
+                memo
+            );
             inputModal.style.display = 'none'; // 모달 닫기
         } else {
             alert('메모 내용을 입력해 주세요.');
