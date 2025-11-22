@@ -9,7 +9,11 @@
 /* 1. 히어로 섹션 */
 .hero-section {
     position: relative;
-    background-color: var(--color-black-text); /* 배경색 검정 */
+    /* background-color: var(--color-black-text); /* 배경색 제거 또는 폴백 색상으로 유지 */ */
+    background-image: url('Gemini_Generated_Image_hyblr8hyblr8hybl.jpg'); /* 👈 파일명만 사용 */
+    background-size: cover;        /* 배경 이미지가 섹션을 꽉 채우도록 */
+    background-position: center;   /* 이미지를 중앙에 배치 */
+    background-repeat: no-repeat;  /* 이미지 반복 안 함 */
     color: var(--color-white-snow);
     height: 400px;
     display: flex;
@@ -18,11 +22,7 @@
     text-align: center;
     border-radius: 10px;
     margin-bottom: 40px;
-    /* 
-
-[Image of snowy night christmas scene with subtle animation]
- */
-    /* 실제로는 배경 이미지 또는 애니메이션을 여기에 삽입 */
+    box-shadow: var(--shadow-light); /* 이미지에도 그림자 효과 추가 */
 }
 
 .hero-text h1 {
