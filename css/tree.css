@@ -83,7 +83,7 @@
     position: relative;
     height: 600px;
     background-color: #eee; 
-    border: 3px dashed var(--color-green-christmas);
+    border: 3px solid var(--color-red-christmas); /* 빨간색 실선 */
     border-radius: 10px;
     overflow: hidden; 
     background: linear-gradient(to bottom, #F8F8F8 0%, #DCDCDC 100%);
