@@ -10,7 +10,7 @@
 .hero-section {
     position: relative;
     background-color: var(--color-black-text); /* 폴백 색상 */
-    background-image: url('../assets/images/Gemini_Generated_Image_hyblr8hyblr8hybl.jpg');
+    background-image: url('/assets/images/Gemini_Generated_Image_hyblr8hyblr8hybl.jpg');
     background-size: cover;        /* 배경 이미지가 섹션을 꽉 채우도록 */
     background-position: center;   /* 이미지를 중앙에 배치 */
     background-repeat: no-repeat;  /* 이미지 반복 안 함 */
