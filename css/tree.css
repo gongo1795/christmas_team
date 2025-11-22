@@ -12,14 +12,14 @@
 /* 페이지 메인 제목 (h1) */
 .tree-main h1 {
     font-family: var(--font-bangers);
-    font-size: 2.8em; /* Bangers 폰트의 크기를 줄여 오버플로우를 방지합니다. */
+    font-size: 2.8em; 
     margin-bottom: 5px;
 }
 
 /* 장식 목록 제목 (h2) */
 .ornament-palette h2 {
     font-family: var(--font-bangers);
-    font-size: 1.6em; /* 크기 조정 */
+    font-size: 1.6em; 
     color: var(--color-black-text);
     border-bottom: 2px dashed var(--color-green-christmas);
     padding-bottom: 10px;
@@ -34,12 +34,12 @@
 
 /* 1. 장식 팔레트 */
 .ornament-palette {
-    flex: 0 0 200px; /* 고정 너비 */
+    flex: 0 0 200px; 
     background-color: #FFF;
     padding: 20px;
     border-radius: 10px;
     box-shadow: var(--shadow-light);
-    height: 600px; /* 트리 영역 높이와 맞춤 */
+    height: 600px; 
 }
 
 .ornaments-list {
@@ -51,18 +51,18 @@
 
 /* --- 장식 아이템 기본 스타일 (이모지용 재정의) --- */
 .ornament {
-    width: 50px; /* 크기 통일 */
-    height: 50px; /* 크기 통일 */
-    border-radius: 5px; /* 모서리를 둥글게 */
-    background-color: transparent !important; /* 배경색 투명 */
-    box-shadow: none !important; /* 그림자 제거 */
+    width: 50px; 
+    height: 50px; 
+    border-radius: 5px; 
+    background-color: transparent !important; 
+    box-shadow: none !important; 
     cursor: grab;
     transition: transform 0.1s;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.2em; /* 이모지 크기 설정 */
+    font-size: 2.2em; 
     line-height: 1;
 }
 
@@ -70,24 +70,24 @@
     cursor: grabbing;
 }
 
-/* 장식 종류별 이모지 스타일 */
-.ball-red::before { content: "⭐️"; } 
-.ball-green::before { content: "❤️"; }
-.star-gold::before { content: "🤎"; }
-.candy-cane::before { content: "🩶"; }
-.gift-box::before { content: "🟠"; }
-.snowflake::before { content: "🟡"; }
-.memo-note::before { content: "📌"; }
+/* 장식 종류별 이모지 스타일 (display: inline-block 추가하여 겹침 방지) */
+.ball-red::before { content: "⭐️"; display: inline-block; } 
+.ball-green::before { content: "❤️"; display: inline-block; }
+.star-gold::before { content: "🤎"; display: inline-block; }
+.candy-cane::before { content: "🩶"; display: inline-block; }
+.gift-box::before { content: "🟠"; display: inline-block; }
+.snowflake::before { content: "🟡"; display: inline-block; }
+.memo-note::before { content: "📌"; display: inline-block; }
 
 /* 2. 트리 영역 */
 .tree-area {
     flex: 1;
     position: relative;
     height: 600px;
-    background-color: #eee; /* 드롭 영역 표시 */
+    background-color: #eee; 
     border: 3px dashed var(--color-green-christmas);
     border-radius: 10px;
-    overflow: hidden; /* 장식의 이동 범위 제한 */
+    overflow: hidden; 
     background: linear-gradient(to bottom, #F8F8F8 0%, #DCDCDC 100%);
 }
 
@@ -99,7 +99,7 @@
     width: 80%;
     height: 90%;
     background-color: var(--color-green-christmas);
-    clip-path: polygon(50% 0%, 100% 100%, 0% 100%); /* 삼각형 (간단한 트리 모양) */
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%); 
     border-radius: 10% / 50%;
 }
 
@@ -188,56 +188,12 @@
 .ornament.memo-ornament, 
 .ornament[data-memo] {
     cursor: pointer !important;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 2px rgba(0,0,0,0.5); /* 그림자를 이모지 주변에 작게 설정 */
-    border-radius: 50%; /* 이모지 주변을 원형으로 강조 */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 2px rgba(0,0,0,0.5); 
+    border-radius: 50%; 
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .ornament.memo-ornament:hover,
 .ornament[data-memo]:hover {
-    transform: scale(1.15); /* 호버 시 약간 크게 */
+    transform: scale(1.15); 
 }
-
-/* --- 이 부분은 style.css에 추가/확인해야 합니다. --- */
-/* (기존 색상 팔레트, 폰트 정의 등은 그대로 두고, 눈 효과 부분만 확인하세요) */
-
-/* ... (기존 네비게이션 스타일 끝) ... */
-
-/* --- 눈 효과 (Snow Effect) 스타일 --- */
-
-/* 1. 눈 컨테이너 (스크롤 방지 및 화면 전체 덮기) */
-.snow-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; 
-    z-index: 999; 
-    overflow: hidden;
-}
-
-/* 2. 개별 눈송이 기본 스타일 (모양 정의) */
-.snowflake {
-    position: absolute;
-    width: 10px; /* 눈송이 크기 */
-    height: 10px;
-    background: #fff; /* 흰색으로 보이도록 정의 */
-    border-radius: 50%; /* 원형 모양 */
-    opacity: 0.8;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-    animation: fall linear infinite; 
-}
-
-/* 3. 눈 내리는 애니메이션 */
-@keyframes fall {
-    0% {
-        transform: translate3d(0, -100px, 0) rotate(0deg);
-        opacity: 0.8;
-    }
-    100% {
-        transform: translate3d(0, 100vh, 0) rotate(360deg);
-        opacity: 0; 
-    }
-}
-/* ... (눈 토글 버튼 스타일은 하단에 이미 있습니다.) ... */

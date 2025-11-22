@@ -1,3 +1,4 @@
+// js/tree.js 파일 전체 내용
 document.addEventListener('DOMContentLoaded', () => {
     const treeArea = document.getElementById('tree-area');
     const resetButton = document.getElementById('reset-button');
@@ -41,14 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ornament.classList.add('ornament', data.type); 
         ornament.setAttribute('data-id', data.id);
         
-        // 장식의 z-index 적용 (저장된 값이 없으면 기본값 10)
+        // 장식의 z-index 적용 
         ornament.style.zIndex = data.zIndex || 10; 
         
-        // 메모 기능이 있는 장식 처리 (모든 장식은 메모 데이터를 가집니다)
+        // 메모 기능이 있는 장식 처리 
         if (data.memo) {
             ornament.setAttribute('data-memo', data.memo); 
             
-            // 클릭 시 메모 열람 모달 띄우기 (모든 장식에 적용)
+            // 클릭 시 메모 열람 모달 띄우기
             ornament.addEventListener('click', () => {
                 viewMemoText.textContent = data.memo;
                 viewModal.style.display = 'block';
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ornament.style.cursor = 'grab';
                 ornament.style.transition = ''; 
                 
-                // 로컬 저장소 업데이트
+                // 로컬 저장소 업데이트 및 Z-index 최상위로 올리기
                 const ornamentId = parseInt(ornament.getAttribute('data-id'));
                 const state = loadTreeState();
                 const item = state.find(o => o.id === ornamentId);
@@ -115,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (item) {
                     item.left = ornament.style.left;
                     item.top = ornament.style.top;
+                    
                     // 드래그 완료 후 z-index를 최상위로 올려서 겹침 문제 해결
                     currentZIndex++; 
                     item.zIndex = currentZIndex;

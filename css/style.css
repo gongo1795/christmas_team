@@ -1,34 +1,20 @@
+/* --- 공통 스타일 정의 --- */
+
 :root {
-    /* 색상 팔레트 */
+    /* 색상 팔레트 (사용자 정의) */
     --color-white-snow: #F0F0F0;
-    --color-dark-brown-background: #2C1D1D; /* 더 어두운 고동색 배경색 추가 */
-    --color-black-text: #1A1A1A; /* 기존 블랙 텍스트 유지 (필요 시 수정 가능) */
-    --color-red-christmas: #72130F; /* 기존 빨간색 유지 */
+    --color-dark-brown-background: #2C1D1D; 
+    --color-black-text: #1A1A1A; 
+    --color-red-christmas: #72130F; 
     --color-green-christmas: #3a5a4a;
-    --color-gold-accent: #B07B2D;
-    --color-button-dark-red: #72130F; /* 새로운 버튼 색상 추가 */
+    --color-gold-accent: #B07B2D; /* 톤 다운된 골드 */
+    --color-button-dark-red: #72130F; 
+    --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.2);
 
-    /* Bangers (영문), Hahmlet (한글) 폰트 설정 */
+    /* 폰트 설정 */
     --font-bangers: 'Bangers', cursive;
-    --font-hahmlet: 'Hahmlet', serif; /* Poor Story 대신 Hahmlet으로 변경 */
-
-    /* 기본 폰트: 한글 가독성을 우선하되, 영문은 Bangers를 기본으로 사용합니다. */
-    --font-primary: var(--font-hahmlet); /* 기본 폰트를 Hahmlet으로 변경 */
-}
-
-/* ... (기존 body, 버튼 스타일 등은 그대로 둡니다) ... */
-
-
-/* --- 네비게이션 바 스타일 (네비게이션 로고에 Bangers 적용) --- */
-.nav-logo a {
-    color: var(--color-red-christmas);
-    font-size: 1.8em;
-    font-weight: 900;
-    text-decoration: none;
-    letter-spacing: 2px;
-    
-    /* 로고는 강하게 영문 폰트 적용 */
-    font-family: var(--font-bangers); 
+    --font-hahmlet: 'Hahmlet', serif; 
+    --font-primary: var(--font-hahmlet); 
 }
 
 * {
@@ -36,11 +22,11 @@
 }
 
 body {
-    background-color: var(--color-dark-brown-background); /* 이 부분을 수정합니다! */
-    color: var(--color-white-snow); /* 배경이 어두워지므로 텍스트 색상을 흰색 계열로 변경 */
+    background-color: var(--color-dark-brown-background); 
+    color: var(--color-white-snow); 
     font-family: var(--font-primary);
     margin: 0;
-    padding-top: 70px;
+    padding-top: 70px; 
     line-height: 1.6;
 }
 
@@ -58,11 +44,11 @@ body {
 }
 
 .button-red {
-    background-color: var(--color-button-dark-red); /* 이 부분을 수정합니다! */
+    background-color: var(--color-button-dark-red); 
     color: var(--color-white-snow);
 }
 .button-red:hover {
-    background-color: #5A0F0D; /* 호버 시 조금 더 어둡게 */
+    background-color: #5A0F0D; /* 고동색 호버 */
     transform: translateY(-2px);
 }
 
@@ -71,7 +57,7 @@ body {
     color: var(--color-white-snow);
 }
 .button-green:hover {
-    background-color: #3a5a4a;
+    background-color: #2F4738; /* 톤 다운된 그린 호버 */
     transform: translateY(-2px);
 }
 
@@ -98,7 +84,7 @@ body {
 }
 
 .nav-logo a {
-    color: var(--color-gold-accent); /* 가독성을 위해 골드 색상으로 변경 */
+    color: var(--color-gold-accent); 
     font-size: 1.8em;
     font-weight: 900;
     text-decoration: none;
@@ -121,28 +107,28 @@ body {
 
 /* --- 눈 효과 (Snow Effect) 스타일 --- */
 
-/* 1. 눈 컨테이너 (스크롤 방지 및 화면 전체 덮기) */
+/* 1. 눈 컨테이너 */
 .snow-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* 눈이 클릭을 방해하지 않도록 설정 */
-    z-index: 999; /* 네비게이션바(1000) 바로 아래 */
+    pointer-events: none; 
+    z-index: 999; 
     overflow: hidden;
 }
 
-/* 2. 개별 눈송이 기본 스타일 */
+/* 2. 개별 눈송이 기본 스타일 (눈 모양 FIX) */
 .snowflake {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: #fff;
+    background: #fff; /* 흰색으로 보이도록 정의 */
     border-radius: 50%;
     opacity: 0.8;
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-    animation: fall linear infinite; /* 눈 내리는 애니메이션 적용 */
+    animation: fall linear infinite; 
 }
 
 /* 3. 눈 내리는 애니메이션 */
@@ -153,13 +139,8 @@ body {
     }
     100% {
         transform: translate3d(0, 100vh, 0) rotate(360deg);
-        opacity: 0; /* 100%에서 투명하게 만들어 사라지게 합니다. */
+        opacity: 0; 
     }
-}
-
-/* 4. 애니메이션 일시 정지/재개 (JS에서 사용) */
-.snow-container.paused .snowflake {
-    animation-play-state: paused; /* 이 클래스가 추가되면 애니메이션 정지 */
 }
 
 /* 5. 눈 토글 버튼 스타일 */
@@ -167,7 +148,7 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 1001; /* 네비게이션바 위에 배치 */
+    z-index: 1001; 
     padding: 10px 15px;
     border-radius: 50%;
     width: 50px;
