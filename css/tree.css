@@ -75,7 +75,7 @@
 .star-gold::before { content: "🤎"; }
 .candy-cane::before { content: "🩶"; }
 .gift-box::before { content: "🟠"; }
-.snowflake::before { content: "🟡"; }
+.ornaments-list .snowflake::before { content: "🟡"; }
 
 /* 2. 트리 영역 */
 .tree-area {
