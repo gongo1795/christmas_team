@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeViewModal = document.getElementById('close-view-modal');
 
     let draggedData = null;
-    let memoDropPosition = { left: 0, top: 0 }; // 메모 드롭 위치 저장
+    let memoDropPosition = { left: 0, top: 0, type: null }; // 드롭 위치와 타입 저장
 
-    const STORAGE_KEY = 'christmasTreeState_Memo'; // 메모를 포함한 새로운 저장 키
+    const STORAGE_KEY = 'christmasTreeState_Memo'; // 로컬 저장소 키
 
     // --- 1. 로컬 저장소 기능 ---
     function saveTreeState(state) {
@@ -37,29 +37,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function createOrnamentElement(data) {
         const ornament = document.createElement('div');
         
-        // 데이터 타입에 따라 클래스 추가 (예: ball-red-memo, star-gold-memo)
         ornament.classList.add('ornament', data.type); 
         ornament.setAttribute('data-id', data.id);
         
-        // 모든 장식은 메모이므로 data-memo 속성 추가
-        ornament.setAttribute('data-memo', data.memo); 
-        
-        // 텍스트가 들어갈 수 있도록 아이콘 표시 (기존 메모 노트 스타일과 구분)
-        if (data.type === 'memo-note') {
-             ornament.innerHTML = '📝'; // 기본 메모 노트에만 아이콘 표시
+        // 메모 기능이 있는 장식 처리
+        if (data.memo) {
+            ornament.setAttribute('data-memo', data.memo); 
+            
+            // 클릭 시 메모 열람 모달 띄우기
+            ornament.addEventListener('click', () => {
+                viewMemoText.textContent = data.memo;
+                viewModal.style.display = 'block';
+            });
+            
+            if (data.type === 'memo-note') {
+                 ornament.innerHTML = '📝'; // 기본 메모 노트에만 아이콘 표시
+            }
         }
-        
-        // 모든 장식 클릭 시 메모 열람 모달 띄우기
-        ornament.addEventListener('click', () => {
-            viewMemoText.textContent = data.memo;
-            viewModal.style.display = 'block';
-        });
-        
-        // 드래그 이벤트 리스너 추가 (위치 이동 기능)
-        addDragListeners(ornament);
-        
-        return ornament;
-    }
         
         // 드래그 이벤트 리스너 추가 (위치 이동 기능)
         addDragListeners(ornament);
@@ -73,30 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
         let offset = { x: 0, y: 0 };
         
         ornament.addEventListener('mousedown', (e) => {
-            // 메모 노트를 클릭했을 때는 드래그 시작을 막고 열람 모달을 띄우는 것이 우선
-            if (e.target.classList.contains('memo-note')) {
-                // 모달을 띄우는 이벤트는 이미 위에서 click으로 처리했으므로, 
-                // 여기서는 드래그 시작만 막아줍니다.
-                // 만약 드래그로 위치를 옮기게 하고 싶다면 이 부분을 수정해야 합니다. 
-                // 현재는 클릭 시 열람을 우선합니다.
-                // 메모 노트는 드래그로 위치 이동을 허용합니다.
-            }
-            
-            e.preventDefault(); // 기본 드래그 방지 (브라우저 이미지 드래그)
+            e.preventDefault(); 
             isDragging = true;
             
-            // 마우스 포인터와 장식의 경계 사이의 오프셋 계산 (퍼센트 기준)
             const rect = ornament.getBoundingClientRect();
-            const treeRect = treeArea.getBoundingClientRect();
             
-            const currentLeft = (rect.left - treeRect.left) / treeRect.width * 100;
-            const currentTop = (rect.top - treeRect.top) / treeRect.height * 100;
-
             offset.x = e.clientX - rect.left;
             offset.y = e.clientY - rect.top;
 
             ornament.style.cursor = 'grabbing';
-            ornament.style.transition = 'none'; // 드래그 중 애니메이션 비활성화
+            ornament.style.transition = 'none';
         });
 
         document.addEventListener('mousemove', (e) => {
@@ -104,14 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const treeRect = treeArea.getBoundingClientRect();
             
-            // 마우스 위치에서 오프셋을 뺀 후, 트리 영역 대비 퍼센트 계산
             let newX = e.clientX - treeRect.left - offset.x;
             let newY = e.clientY - treeRect.top - offset.y;
             
             let newLeftPercent = (newX / treeRect.width) * 100;
             let newTopPercent = (newY / treeRect.height) * 100;
 
-            // 경계 제한
             newLeftPercent = Math.max(0, Math.min(100, newLeftPercent));
             newTopPercent = Math.max(0, Math.min(100, newTopPercent));
             
@@ -123,19 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isDragging) {
                 isDragging = false;
                 ornament.style.cursor = 'grab';
-                ornament.style.transition = ''; // 애니메이션 복구
+                ornament.style.transition = ''; 
                 
                 // 로컬 저장소 업데이트
-                const newLeft = ornament.style.left;
-                const newTop = ornament.style.top;
                 const ornamentId = parseInt(ornament.getAttribute('data-id'));
-                
                 const state = loadTreeState();
                 const item = state.find(o => o.id === ornamentId);
                 
                 if (item) {
-                    item.left = newLeft;
-                    item.top = newTop;
+                    item.left = ornament.style.left;
+                    item.top = ornament.style.top;
                     saveTreeState(state);
                 }
             }
@@ -165,11 +140,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropX = ((e.clientX - rect.left) / rect.width) * 100;
         const dropY = ((e.clientY - rect.top) / rect.height) * 100;
         
-        // 메모 입력을 위해 모달을 띄우고 위치와 타입을 저장
-        memoDropPosition = { left: `${dropX}%`, top: `${dropY}%`, type: draggedData.type };
-        inputModal.style.display = 'block';
-        inputMemoText.value = '';
-        inputMemoText.focus();
+        const type = draggedData.type;
+        const left = `${dropX}%`;
+        const top = `${dropY}%`;
+        
+        // **메모 노트일 경우:** 입력 모달을 띄우고 위치를 저장
+        if (type === 'memo-note') {
+            memoDropPosition = { type, left, top };
+            inputModal.style.display = 'block';
+            inputMemoText.value = '';
+            inputMemoText.focus();
+        } 
+        
+        // **일반 장식일 경우:** 메모 없이 바로 트리에 추가
+        else { 
+            addOrnamentToTree(type, left, top);
+        }
         
         draggedData = null;
     });
@@ -181,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const memo = inputMemoText.value.trim();
         
         if (memo) {
-            // memoDropPosition에 저장된 타입 사용
+            // 메모 데이터와 저장된 위치를 사용
             addOrnamentToTree(
                 memoDropPosition.type, 
                 memoDropPosition.left, 
@@ -201,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: type,
             left: left,
             top: top,
-            memo: memo 
+            memo: memo // 일반 장식은 null, 메모는 텍스트
         };
 
         // 1. DOM에 추가
@@ -240,7 +226,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 9. 모달 닫기 기능 ---
-    closeInputModal.onclick = () => inputModal.style.display = 'none';
+    closeInputModal.onclick = () => {
+        inputModal.style.display = 'none';
+        // 메모 입력을 취소하면 장식 추가 프로세스도 취소됨
+    }
     closeViewModal.onclick = () => viewModal.style.display = 'none';
 
     window.onclick = function(event) {
