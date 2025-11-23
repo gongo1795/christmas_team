@@ -67,6 +67,29 @@
     margin: 0 10px;
 }
 
+/* NEW: D-Day 카운터 스타일 */
+.countdown-timer { 
+    /* 폰트를 한글 폰트(Hahmlet)로 변경하고 크기를 줄입니다. */
+    font-family: var(--font-primary); /* Hahmlet 폰트 적용 */
+    font-size: 1.5em; /* 크기 축소 */
+    font-weight: 700;
+    
+    color: var(--color-white-snow); /* 흰색 글씨로 변경 */
+    
+    /* ⚠️ 배경색, 패딩, 박스 그림자 제거 */
+    background-color: transparent; 
+    padding: 0;
+    box-shadow: none; 
+    
+    margin: 0 auto 10px auto; /* h1 위에 위치하도록 하단 마진 추가 */
+    display: block; /* 블록 요소로 변경하여 중앙 정렬 유지 */
+    text-align: center;
+    line-height: 1.4;
+    
+    /* ✨ 가독성을 위한 진한 텍스트 그림자 추가 */
+    text-shadow: 0 0 5px #000000, 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
 /* 2. 기능 카드 섹션 */
 .feature-cards {
     display: flex;

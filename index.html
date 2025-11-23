@@ -22,6 +22,7 @@
                 <a href="index.html">메인</a>
                 <a href="letter.html">편지 보내기</a>
                 <a href="tree-decorator.html">트리 꾸미기</a>
+                <a href="minigame.html">미니게임</a>
             </nav>
         </div>
     </header>
@@ -29,13 +30,14 @@
     <main class="main-content">
         <section class="hero-section">
             <div class="hero-text">
-                <h1>Merry christmas</h1>
-                <p>당신의 소원을 빌고, 트리를 장식하며 따뜻한 겨울을 준비하세요!</p>
-                <div class="hero-actions">
-                    <a href="letter.html" class="button-red">편지 쓰기</a>
-                    <a href="tree-decorator.html" class="button-green">트리 꾸미기</a>
+            <div id="countdown-timer" class="countdown-timer">D-Day</div> 
+            
+            <h1>Merry christmas</h1>
+            
+            <p>당신의 소원을 빌고, 트리를 장식하며 따뜻한 겨울을 준비하세요!</p>
+            <div class="hero-actions">
                 </div>
-            </div>
+        </div>
         </section>
 
         <section class="feature-cards">
@@ -50,8 +52,17 @@
                 <p>다양한 장식과 빛으로 당신의 웹 트리를 화려하게 완성하고 저장하세요!</p>
                 <a href="tree-decorator.html" class="button-green">Go to Decorator</a>
             </article>
+            
+            <article class="card">
+                <h2>🕹️ 크리스마스 미니게임</h2>
+                <p>선물 잡기, 눈 피하기 등 재미있는 게임을 즐기고 포인트를 모아보세요!</p>
+                <a href="minigame.html" class="button-red">Go to Mini-Games</a>
+            </article>
         </section>
     </main>
+
+    <audio id="christmas-carol" src="assets/audio/carol.mp3" loop></audio> 
+    <button id="music-toggle" class="music-toggle-button">🎶</button>
     
     <button id="snow-toggle">❄️</button> 
 

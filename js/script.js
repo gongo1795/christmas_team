@@ -53,4 +53,91 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         toggleSnow(true); // 기본적으로 눈 내림 상태로 시작
     }
+
+    
+    // --- NEW: 1. D-Day 카운터 로직 ---
+    function startCountdown() {
+        const countdownEl = document.getElementById('countdown-timer');
+
+        // 메인 페이지가 아닐 경우 실행하지 않음
+        if (!countdownEl) return; 
+        
+        // 목표 날짜: 현재 연도의 12월 25일 자정
+        const now = new Date();
+        // 월은 0부터 시작하므로 11이 12월입니다.
+        let targetDate = new Date(now.getFullYear(), 11, 25, 0, 0, 0); 
+
+        // 만약 올해 크리스마스가 이미 지났다면, 내년 크리스마스를 목표로 설정
+        if (now > targetDate) {
+            targetDate = new Date(now.getFullYear() + 1, 11, 25, 0, 0, 0);
+        }
+        
+        function updateCountdown() {
+            const currentTime = new Date().getTime();
+            const difference = targetDate - currentTime;
+
+            if (difference < 0) {
+                clearInterval(timerInterval);
+                countdownEl.innerHTML = "🎁 MERRY CHRISTMAS! 🎁";
+                return;
+            }
+
+            // 남은 일, 시, 분, 초 계산
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            countdownEl.innerHTML = `D-${days} <br> ${hours}시 ${minutes}분 ${seconds}초`;
+        }
+
+        const timerInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // 페이지 로드 시 즉시 표시
+    }
+    
+    // D-Day 카운터 시작
+    startCountdown(); 
+
+    // --- NEW: 2. 배경 음악 (캐롤) 토글 로직 ---
+    const audio = document.getElementById('christmas-carol');
+    const musicToggleButton = document.getElementById('music-toggle');
+    
+    // 오디오 요소가 존재하는지 확인 (index.html에서만 실행)
+    if (audio && musicToggleButton) {
+        
+        // 초기 상태 로드 (로컬 저장소에서 마지막 상태 복구)
+        const savedMusicState = localStorage.getItem('musicEnabled') === 'true';
+        if (savedMusicState) {
+            // Note: 브라우저 보안 정책으로 인해 자동 재생은 일반적으로 막힙니다.
+            musicToggleButton.textContent = '🔊'; 
+        } else {
+            musicToggleButton.textContent = '🔇';
+        }
+
+        musicToggleButton.addEventListener('click', () => {
+            if (audio.paused) {
+                // 재생 시도
+                audio.play()
+                    .then(() => {
+                        musicToggleButton.textContent = '🔊';
+                        localStorage.setItem('musicEnabled', 'true');
+                    })
+                    .catch(error => {
+                        // 재생 실패 시 (예: 사용자 상호작용 부족)
+                        console.error("Audio playback failed:", error);
+                        alert("음악 재생을 위해 페이지와 상호작용한 후 다시 시도해 주세요.");
+                        musicToggleButton.textContent = '🔇'; 
+                        localStorage.setItem('musicEnabled', 'false');
+                    });
+            } else {
+                // 일시 정지
+                audio.pause();
+                musicToggleButton.textContent = '🔇';
+                localStorage.setItem('musicEnabled', 'false');
+            }
+        });
+    }
+    
+
+
 });

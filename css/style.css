@@ -158,5 +158,29 @@ body {
 }
 
 #snow-toggle:hover {
-    background-color: #902f2c;
+    background-color: #604d07;
+}
+
+/* 6. 음악 토글 버튼 스타일 (NEW) */
+#music-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 80px; /* 눈 토글 버튼의 왼쪽으로 띄웁니다 */
+    z-index: 1001; 
+    padding: 10px 15px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: var(--color-green-christmas); 
+    color: var(--color-white-snow);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#music-toggle:hover {
+    background-color: #2F4738; 
 }
